@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MouseOver</title>
+    <style>
+        .imgg {
+            display: inline-block;
+            position: relative;
+        }
+        img {
+            width: 400px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+        .tooltip {
+            text-align: left;
+            padding: 10px;
+            background-color: black;
+            color: white;
+            font-size: 15px;
+            opacity: 0;
+            position: absolute;
+            top: 50%; /* Position the tooltip below the image */
+            left: 102%;
+            white-space: nowrap; /* Prevent text wrapping */
+            transition: opacity 0.3s; /* Smooth transition */
+        }
+        .tooltip.show {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="imgg">
+            <img src="img/download.jpeg" alt="" onmouseover="showTooltip(this)" onmouseout="hideTooltip(this)">
+            <div class="tooltip">
+                <table>
+                    <tr>
+                        <th>Name:</th>
+                        <td>Unknown</td>
+                    </tr>
+                    <tr>
+                        <th>Gender:</th>
+                        <td>Male</td>
+                    </tr>
+                    <tr>
+                        <th>Age:</th>
+                        <td>19</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script>
+        function showTooltip(img) {
+            const tooltip = img.nextElementSibling;
+            tooltip.classList.add('show');
+        }
+
+        function hideTooltip(img) {
+            const tooltip = img.nextElementSibling;
+            tooltip.classList.remove('show');
+        }
+    </script>
+</body>
+</html>

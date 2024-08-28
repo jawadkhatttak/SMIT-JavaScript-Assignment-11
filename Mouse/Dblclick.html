@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        .container{
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f1f1f1;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        img {
+            height: 200px;
+            transition: transform 0.3s ease-in-out, z-index 0s 0.3s;
+        }
+        .zoomed {
+            z-index: 10;
+            transition: transform 0.3s ease-in-out, z-index 0s 0s;
+        }
+    </style>
+</head>
+<body>
+    <!-- Dblclick: Create a zoom feature for an image gallery that zooms in/out on double-click. -->
+    <div class="container">
+        <div class="gallery">
+            <img src="img/corp.jpg" alt="Image 1" ondblclick="toggleZoom(this)" />
+            <img src="img/desktop.jpg" alt="Image 2" ondblclick="toggleZoom(this)" />
+            <img src="img/download.jpeg" alt="Image 3" ondblclick="toggleZoom(this)" />
+            <img src="img/portrait.jpg" alt="Image 4" ondblclick="toggleZoom(this)" />
+            <img src="img/square.jpg" alt="Image 5" ondblclick="toggleZoom(this)" />
+            <img src="img/square1.jpg" alt="Image 6" ondblclick="toggleZoom(this)" />
+        </div>
+    </div>
+
+    <script>
+        function toggleZoom(img) {
+            if (img.style.transform === "scale(1.3)") {
+                img.style.transform = "scale(1)";
+                img.classList.remove("zoomed");
+            } else {
+                img.style.transform = "scale(1.3)";
+                img.classList.add("zoomed");
+            }
+        }
+    </script>
+</body>
+</html>

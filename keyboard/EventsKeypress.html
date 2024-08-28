@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Search Bar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .search-container {
+            width: 300px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .results {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-top: none;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border-radius: 0 0 5px 5px;
+            z-index: 1;
+            max-height: 200px;
+            overflow-y: auto;
+            display: none; /* Hidden by default */
+        }
+
+        .result-item {
+            padding: 10px;
+            cursor: pointer;
+        }
+
+        .result-item:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+
+<div class="search-container">
+    <input type="text" id="searchBar" class="search-bar" placeholder="Search..." />
+    <div id="results" class="results"></div>
+</div>
+
+<script>
+    const searchBar = document.getElementById('searchBar');
+    const resultsContainer = document.getElementById('results');
+
+    const items = [
+        "Apple",
+        "Banana",
+        "Cherry",
+        "Date",
+        "Fig",
+        "Grape",
+        "Kiwi",
+        "Lemon",
+        "Mango",
+        "Orange",
+        "Papaya",
+        "Pear",
+        "Pineapple",
+        "Raspberry",
+        "Strawberry",
+        "Watermelon"
+    ];
+
+    searchBar.addEventListener('input', () => {
+        const query = searchBar.value.toLowerCase();
+        resultsContainer.innerHTML = ''; // Clear previous results
+        if (query) {
+            const filteredItems = items.filter(item => item.toLowerCase().includes(query));
+            // =>: This is the arrow function syntax, separating the parameter from the function body.
+            if (filteredItems.length) {             //some value 
+                resultsContainer.style.display = 'block'; // Show results
+                filteredItems.forEach(item => {
+                    const div = document.createElement('div');
+                    div.className = 'result-item';
+                    div.textContent = item;
+                    div.addEventListener('click', () => {
+                        searchBar.value = item;
+                        resultsContainer.innerHTML = '';
+                        resultsContainer.style.display = 'none';
+                    });
+                    resultsContainer.appendChild(div);
+                });
+            } else {
+                resultsContainer.style.display = 'none'; // Hide results if no match
+            }
+        } else {
+            resultsContainer.style.display = 'none'; // Hide results if search bar is empty
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!searchBar.contains(event.target) && !resultsContainer.contains(event.target)) {
+            resultsContainer.style.display = 'none'; // Hide results if click outside
+        }
+    });
+</script>
+
+</body>
+</html>

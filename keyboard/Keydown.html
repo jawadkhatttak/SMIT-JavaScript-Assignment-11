@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .message {
+            margin-bottom: 10px;
+        }
+
+        .message.user {
+            text-align: right;
+        }
+
+        .message.bot {
+            text-align: left;
+        }
+
+        .input-container {
+            display: flex;
+        }
+
+        .input-container input {
+            flex: 1;
+            border: none;
+            padding: 10px;
+            border-top: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        .input-container button {
+            border: none;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+            border-top: 1px solid #ccc;
+        }
+
+        .input-container button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="chat-container">
+    <div class="messages" id="messages">
+        <!-- Messages will be displayed here -->
+    </div>
+    <div class="input-container">
+        <input type="text" id="messageInput" placeholder="Type a message..." />
+        <button id="sendButton">Send</button>
+    </div>
+</div>
+
+<script>
+    const messageInput = document.getElementById('messageInput');
+    const messages = document.getElementById('messages');
+    const sendButton = document.getElementById('sendButton');
+
+    function sendMessage() {
+        const messageText = messageInput.value.trim();
+        if (messageText) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message user';
+            messageDiv.textContent = messageText;
+            messages.appendChild(messageDiv);
+            messageInput.value = '';
+            messages.scrollTop = messages.scrollHeight; // Scroll to the bottom
+        }
+    }
+
+    messageInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent the default action (e.g., form submission)
+            sendMessage();
+        }
+    });
+
+    sendButton.addEventListener('click', () => {
+        sendMessage();
+    });
+</script>
+
+</body>
+</html>

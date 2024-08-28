@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notification Bar with Fade-Out Effect</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .notification-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            font-size: 18px;
+            transition: opacity 1s ease-out;
+            opacity: 1;
+            z-index: 1000;
+        }
+
+        .notification-bar.hidden {
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="notification-bar" id="notificationBar">
+    This is a notification bar. Move your mouse away to see it fade out.
+</div>
+
+<script>
+    const notificationBar = document.getElementById('notificationBar');
+
+    notificationBar.addEventListener('mouseleave', () => {
+        notificationBar.classList.add('hidden');
+    });
+
+    // Optional: Reset the notification bar when mouse enters again
+    notificationBar.addEventListener('mouseenter', () => {
+        notificationBar.classList.remove('hidden');
+    });
+</script>
+
+</body>
+</html>

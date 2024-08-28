@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Mouse Events</title>
+  </head>
+  <style>
+    button {
+      margin: 10px;
+      padding: 10px;
+      background-color: lightblue;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+
+    @import url("https://fonts.googleapis.com/css2?Roboto&display=swap");
+
+    .btn {
+      cursor: pointer;
+      border: 0px solid rgb(187, 204, 0);
+      font-family: "system-ui";
+      font-size: 24px;
+      color: rgb(255, 255, 255);
+      padding: 10px 30px;
+      transition: 803ms;
+      width: 215px;
+      box-shadow: rgb(0, 0, 0) 0px 0px 0px 0px;
+      border-radius: 25px;
+      background: linear-gradient(
+        90deg,
+        rgb(0, 102, 204) 0%,
+        rgb(197, 0, 204) 100%
+      );
+      font-weight: 400;
+      --hover-borderSize: 0;
+      --hover-width: 230px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: row;
+    }
+
+    .btn:hover {
+      color: rgb(255, 255, 255);
+      width: 230px;
+      background: rgb(0, 102, 204) none repeat scroll 0% 0% / auto padding-box
+      border-box;
+      border-color: rgb(204, 0, 105);
+      border-width: 0px;
+      border-style: solid;
+    }
+    .btn:active{
+        scale: 1.2;
+        background: rgb(104, 122, 141) none repeat scroll 0% 0% / auto padding-box
+        border-box;
+
+    }
+    i{
+      font-size: 24px;
+      margin-left: 10px;
+    }
+  </style>
+  <body>
+    <button class="btn" onclick="increment()" id="customBtn">
+      Increment<i class="fa-solid fa-thumbs-up"></i>
+    </button>
+    
+    <script>
+      let i = 0;
+      function increment(params) {
+        i = i + 1;
+        console.log("Value Incremented: ", i);
+      }
+    </script>
+  </body>
+</html>

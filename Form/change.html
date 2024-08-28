@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Strength Indicator</title>
+    <style>
+        .strength-message {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        #pass:focus {
+            outline: none;
+            border: 2px solid #000; 
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Change: Create a password strength indicator that updates as you type. -->
+    <form action="#">
+        <label for="password">Password</label>
+        <input oninput="Strength()" type="password" name="password" id="pass">
+        <div id="message" class="strength-message"></div> <!-- Message Div to display strength -->
+    </form>
+    
+    <script>
+        function Strength() {
+            console.log("1");
+            let passwordInput = document.getElementById("pass");
+            let password = passwordInput.value;
+            let messageDiv = document.getElementById("message");
+
+            if(password.length < 8) {
+                passwordInput.style.border = "2px solid red";
+                messageDiv.innerHTML = "Password strength: weak";
+                messageDiv.style.color = "red";
+            } else {
+                passwordInput.style.border = "2px solid green";
+                messageDiv.innerHTML = "Password strength: strong";
+                messageDiv.style.color = "green";
+            }
+        }
+    </script>
+</body>
+</html>

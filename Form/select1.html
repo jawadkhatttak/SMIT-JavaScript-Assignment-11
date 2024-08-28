@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dropdown Chart Update</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        #chartContainer {
+            width: 600px;
+            height: 400px;
+        }
+        select {
+            margin-bottom: 20px;
+            padding: 5px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Dropdown Chart Update</h1>
+    <select id="dataSelector">
+        <option value="data1">Dataset 1</option>
+        <option value="data2">Dataset 2</option>
+        <option value="data3">Dataset 3</option>
+    </select>
+    <div id="chartContainer">
+        <canvas id="myChart"></canvas>
+    </div>
+
+    <!-- Include Chart.js library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+        // Get reference to the canvas and the dropdown
+        const ctx = document.getElementById('myChart').getContext('2d');
+        const dataSelector = document.getElementById('dataSelector');
+
+        // Define datasets
+        const datasets = {
+            data1: [12, 19, 3, 5, 2, 3],
+            data2: [20, 30, 40, 20, 10, 5],
+            data3: [3, 10, 5, 15, 20, 25]
+        };
+
+        // Create a new chart instance
+        const myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+                datasets: [{
+                    label: 'Values',
+                    data: datasets.data1,
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                    borderColor: 'rgba(54, 162, 235, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Update the chart when the dropdown selection changes
+        dataSelector.addEventListener('change', function() {
+            const selectedData = datasets[this.value];
+            myChart.data.datasets[0].data = selectedData;
+            myChart.update();
+        });
+    </script>
+</body>
+</html>

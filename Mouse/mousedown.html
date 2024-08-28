@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drag and Drop File Uploader</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        #dropZone {
+            width: 300px;
+            height: 200px;
+            border: 2px dashed #999;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: #999;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #dropZone.dragging {
+            border-color: #666;
+            color: #666;
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <div id="dropZone">Drag files here or click to upload</div>
+    <input type="file" id="fileInput" style="display: none;" multiple />
+
+    <script>
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        // Open file dialog when the drop zone is clicked
+        dropZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        // Drag and drop events
+        dropZone.addEventListener('dragover', (event) => {
+            event.preventDefault();
+            dropZone.classList.add('dragging');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragging');
+        });
+
+        dropZone.addEventListener('drop', (event) => {
+            event.preventDefault();
+            dropZone.classList.remove('dragging');
+
+            const files = event.dataTransfer.files;
+            handleFiles(files);
+        });
+
+        fileInput.addEventListener('change', (event) => {
+            const files = event.target.files;
+            handleFiles(files);
+        });
+
+        function handleFiles(files) {
+            if (files.length === 0) {
+                alert("No files were selected or dropped.");
+                return;
+            }
+
+            for (let i = 0; i < files.length; i++) {
+                console.log(`File: ${files[i].name}, Size: ${files[i].size} bytes`);
+                // Implement your file handling logic here
+            }
+        }
+    </script>
+</body>
+</html>

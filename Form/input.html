@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Input (Search bar)</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+      .container {
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        width: 400px;
+        margin: 20px;
+      }
+      .searches {
+        display: grid;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .searches > div {
+        width: 100px;
+        padding: 10px;
+        background-color: #f5f5f5;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+      .searches > div:hover {
+        background-color: #ddd;
+      }
+      #inp {
+        width: 200px;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Input: Create a live search feature that updates results as you type. -->
+    <div class="container">
+      <label for="Search">Search</label>
+      <input type="text" id="inp" />
+      <div class="searches"></div>
+    </div>
+    <script>
+      const searchInput = document.getElementById("inp");
+      const searchesContainer = document.querySelector(".searches");
+
+      const items = [
+        "Apple",
+        "banana",
+        "Cherry",
+        "Date",
+        "Elderberry",
+        "Fig",
+        "Grape",
+        "Honeydew",
+        "Jackfruit",
+        "Kiwifruit",
+        "Lemon",
+        "Mango",
+        "Nectarine",
+        "Orange",
+        "Papaya",
+        "Quince",
+        "Raspberry",
+        "Strawberry",
+        "Tangerine",
+        "Umbrella",
+        "Vinegar",
+        "Watermelon",
+        "Xanadu",
+        "Yogurt",
+        "Zucchini",
+      ];
+
+      searchInput.addEventListener("input", () => {
+        const toLower = searchInput.value.toLowerCase();
+        searchesContainer.innerHTML = "";
+        if (toLower) {
+          const filteredItems = items.filter((item) =>
+            item.toLowerCase().includes(toLower)
+          );
+          if (filteredItems.length) {
+            searchesContainer.style.display = "block"; // Show results if match
+            filteredItems.forEach((item) => {
+              const div = document.createElement("div");
+              div.textContent = item;
+              searchesContainer.appendChild(div);
+              div.addEventListener("click", () => {
+                  searchInput.value = item;
+                  searchesContainer.innerHTML = "";
+                  searchesContainer.style.display = "none";
+                });
+            });
+        } else {
+            const div = document.createElement("div");
+            div.textContent = "Sorry couldn't find one";
+            searchesContainer.appendChild(div);
+            // searchesContainer.style.display = "none"; // Hide results if no match
+          }
+        } else {
+          searchesContainer.style.display = "none"; // Hide results if search bar is empty
+        }
+      });
+      document.addEventListener("click", (event) => {
+        if (
+          !searchInput.contains(event.target) &&
+          !searchesContainer.contains(event.target)
+        ) {
+          searchesContainer.style.display = "none"; // Hide results if click outside
+        }
+      });
+    </script>
+
+  </body>
+</html>
+
+<!-- 1. Search Bar:
+
+An input field (<input type="text" id="inp">) labeled "Search" allows users to enter their search queries.
+2. Live Search:
+
+The JavaScript code listens for input changes in the search bar (searchInput.addEventListener("input")).
+As the user types, the code:
+Converts the search term to lowercase for case-insensitive matching (toLower = searchInput.value.toLowerCase()).
+Clears the previous search results (searchesContainer.innerHTML = "").
+Filters the original items array based on whether the lowercase item includes the lowercase search term (filteredItems.filter(...)).
+If there are matches:
+Creates a separate <div> element for each matching item.
+Sets the content (textContent) of each <div> to the matching item name.
+Appends these divs to the searchesContainer using appendChild.
+Adds a click event listener to each <div>. Clicking on a search result sets the search bar value to the clicked item and hides the results.
+3. Empty Search:
+
+If the search bar is empty, the results container is hidden (searchesContainer.style.display = "none").
+4. Click to Hide Results:
+
+There's an additional event listener on the entire document (document.addEventListener("click")).
+If the user clicks outside of both the search bar and the results container, the results are hidden again. -->

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Focus Example</title>
+    <style>
+        input {
+            border: 2px solid black;
+            border-radius: 4px;
+        }
+        #warning {
+            margin-top: 5px;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Focus: Create a form that displays a hint when an input field is focused. -->
+    <form action="#">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" onfocus="showHint()" onblur="hideHint()">
+        <div id="warning"></div>
+    </form>
+
+    <script>
+        function showHint() {
+            const warning = document.getElementById('warning');
+            warning.innerHTML = "Email must contain '@'";
+            warning.style.color = 'red';
+            document.getElementById('email').style.border = '2px solid red';
+        }
+
+        function hideHint() {
+            const warning = document.getElementById('warning');
+            warning.innerHTML = "";
+            document.getElementById('email').style.border = '2px solid black';
+        }
+    </script>
+</body>
+</html>
